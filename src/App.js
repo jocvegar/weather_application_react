@@ -20,36 +20,41 @@ class App extends React.Component {
         e.preventDefault();
         const city = e.target.elements.city.value;
         const country = e.target.elements.country.value;
-        // try {
-        //     const API_CALL = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=imperial`);
-        //     if (API_CALL.ok) {
-        //         const jsonResponse = await API_CALL.json();
-        //         console.log(jsonResponse);
-        //     }
-        //     throw new Error('Request Failed!');
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try {
+            const API_CALL = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=imperial`);
+            if (API_CALL.ok) {
+                const jsonResponse = await API_CALL.json();
 
-        const API_CALL = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
-        const jsonResponse = await API_CALL.json();
-        console.log(jsonResponse);
-
-        this.setState({
-            temperature: jsonResponse.main.temp,
-            city: jsonResponse.name,
-            country: jsonResponse.sys.country,
-            humidity: jsonResponse.main.humidity,
-            description: jsonResponse.weather[0].description,
-            error: ""
-        })
-
+                this.setState({
+                    temperature: jsonResponse.main.temp,
+                    city: jsonResponse.name,
+                    country: jsonResponse.sys.country,
+                    humidity: jsonResponse.main.humidity,
+                    description: jsonResponse.weather[0].description,
+                    error: ""
+                })
+            } else {
+                throw new Error('Request Failed!');
+            }
+        }   catch (error) {
+            // console.log(error);
+            this.setState({
+                temperature: undefined,
+                city: undefined,
+                country: undefined,
+                humidity: undefined,
+                description: undefined,
+                error: "Please enter a value!"
+            })
+        }
+        // const API_CALL = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=imperial`);
+        // const jsonResponse = await API_CALL.json();
+        // console.log(jsonResponse);
     }
 
     render() {
         return(
             <div>
-                Hello
                 <Title />
                 <Form getWeather={this.getWeather}/>
                 <Weather
