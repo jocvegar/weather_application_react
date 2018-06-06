@@ -52,7 +52,21 @@ class App extends React.Component {
         // console.log(jsonResponse);
     }
 
+    handleClick = e => {
+        document.getElementById("formId").reset();
+        this.setState({
+            temperature: undefined,
+            city: undefined,
+            country: undefined,
+            humidity: undefined,
+            description: undefined,
+            error: undefined
+        })
+    }
+
     render() {
+        const buttonStyle = {padding: '8px 3.2em', marginTop: '-1rem'}
+
         return(
             <div>
                 <div className="wrapper">
@@ -64,6 +78,9 @@ class App extends React.Component {
                                 </div>
                                 <div className="col-xs-7 form-container">
                                     <Form getWeather={this.getWeather}/>
+                                    <div className="rest-form-button">
+                                        <button style={buttonStyle} onClick={this.handleClick}>Reset</button>
+                                    </div>
                                     <Weather
                                         temperature={this.state.temperature}
                                         city={this.state.city}
@@ -82,8 +99,5 @@ class App extends React.Component {
         );
     }
 }
-
-
-
 
 export default App;
