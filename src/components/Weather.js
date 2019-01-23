@@ -24,9 +24,16 @@ class Weather extends React.Component {
 				}
 				{
 					this.props.description &&
-					<p className="weather__key">Conditions:
-						<span className="weather__value"> {this.props.description}</span>
-					</p>
+					<div>
+						<p className="weather__key">Conditions:
+							<span className="weather__value"> {this.props.description}</span>
+						</p>
+						<div className="row">
+						    <div className="col-xs-offset-8 col-xs-4">
+						        <button onClick={this.props.handleClick}>Reset</button>
+						    </div>
+						</div>
+					</div>
 				}
 				{
 					this.props.error && <p className="weather__error">{this.props.error}</p>

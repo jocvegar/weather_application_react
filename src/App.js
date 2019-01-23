@@ -65,8 +65,6 @@ class App extends React.Component {
     }
 
     render() {
-        const buttonStyle = {padding: '8px 3.2em', marginTop: '-1rem'}
-
         return(
             <div>
                 <div className="wrapper">
@@ -78,9 +76,6 @@ class App extends React.Component {
                                 </div>
                                 <div className="col-xs-7 form-container">
                                     <Form getWeather={this.getWeather}/>
-                                    <div className="rest-form-button">
-                                        <button style={buttonStyle} onClick={this.handleClick}>Reset</button>
-                                    </div>
                                     <Weather
                                         temperature={this.state.temperature}
                                         city={this.state.city}
@@ -88,6 +83,7 @@ class App extends React.Component {
                                         humidity={this.state.humidity}
                                         description={this.state.description}
                                         error={this.state.error}
+                                        handleClick={this.handleClick}
                                     />
                                 </div>
                             </div>
